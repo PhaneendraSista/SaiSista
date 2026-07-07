@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Phaneendra Sista — Data Engineer &amp; AI Practitioner</title>
+<meta name="description" content="Portfolio of Sai Phaneendra Sista, Data Engineer and AI in Data Analytics graduate student at Indiana Wesleyan University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#12161b;
+    --bg-elev:#191e25;
+    --bg-elev-2:#1f2530;
+    --line:#2a313b;
+    --text:#e8ecf1;
+    --text-muted:#8b95a3;
+    --teal:#3fd8c4;
+    --teal-dim:#2a9c8d;
+    --amber:#e8a33d;
+    --radius:10px;
+    --display:'Space Grotesk', sans-serif;
+    --body:'IBM Plex Sans', sans-serif;
+    --mono:'IBM Plex Mono', monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--teal); color:#0b0f13;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- Layout shell ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .spine{
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:36px 0;
+  }
+  .spine-line{
+    position:relative;
+    width:2px;
+    flex:1;
+    background:var(--line);
+    overflow:visible;
+  }
+  .spine-node{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    width:11px;
+    height:11px;
+    border-radius:50%;
+    background:var(--bg-elev-2);
+    border:2px solid var(--line);
+    transition:border-color .3s ease, background .3s ease, box-shadow .3s ease;
+  }
+  .spine-node.active{
+    border-color:var(--teal);
+    background:var(--teal);
+    box-shadow:0 0 0 4px rgba(63,216,196,0.15);
+  }
+  .spine-label{
+    position:absolute;
+    left:20px;
+    top:-6px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.08em;
+    color:var(--text-muted);
+    white-space:nowrap;
+    opacity:0;
+    transform:translateX(-4px);
+    transition:opacity .25s ease, transform .25s ease;
+    pointer-events:none;
+  }
+  .spine-node.active .spine-label{opacity:1; transform:translateX(0);}
+  .spine-cap{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--text-muted);
+  }
+
+  main{min-width:0;}
+
+  section{
+    padding:96px 40px;
+    border-bottom:1px solid var(--line);
+    max-width:820px;
+  }
+  section:last-of-type{border-bottom:none;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--teal-dim);
+  }
+
+  h1,h2,h3{
+    font-family:var(--display);
+    font-weight:600;
+    letter-spacing:-0.01em;
+    margin:0 0 .4em 0;
+  }
+  h1{font-size:clamp(2.2rem, 5vw, 3.4rem); line-height:1.05;}
+  h2{font-size:clamp(1.6rem, 3.4vw, 2.1rem);}
+  h3{font-size:1.15rem; color:var(--text);}
+  p{color:var(--text-muted); margin:0 0 1.1em 0;}
+  strong{color:var(--text); font-weight:600;}
+
+  /* ---------- Hero ---------- */
+  #home{
+    padding-top:120px;
+    padding-bottom:110px;
+  }
+  .role-line{
+    font-family:var(--mono);
+    font-size:1rem;
+    color:var(--amber);
+    margin-bottom:28px;
+  }
+  .hero-lede{
+    font-size:1.08rem;
+    max-width:640px;
+  }
+  .hero-cta{
+    display:flex;
+    gap:14px;
+    margin-top:32px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:.03em;
+    padding:12px 20px;
+    border-radius:6px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn-primary{
+    background:var(--teal);
+    color:#0b0f13;
+    font-weight:600;
+    border:1px solid var(--teal);
+  }
+  .btn-primary:hover{transform:translateY(-2px); background:#57e0cf;}
+  .btn-ghost{
+    background:transparent;
+    color:var(--text);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal); transform:translateY(-2px);}
+
+  /* pipeline stat strip */
+  .stat-strip{
+    display:flex;
+    gap:0;
+    margin-top:56px;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .stat{
+    flex:1;
+    padding:18px 20px;
+    border-right:1px solid var(--line);
+  }
+  .stat:last-child{border-right:none;}
+  .stat-k{
+    font-family:var(--mono);
+    font-size:1.5rem;
+    color:var(--teal);
+    display:block;
+  }
+  .stat-v{
+    font-size:12px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+  }
+
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:36px;
+  }
+  .value-card{
+    background:var(--bg-elev);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 28px;
+    margin-top:8px;
+  }
+  .value-card p{margin-bottom:0; color:var(--text);}
+  .value-card .eyebrow{margin-bottom:12px;}
+
+  .tag-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:18px;
+  }
+  .tag{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-muted);
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:5px;
+  }
+
+  /* ---------- Portfolio / Artifact ---------- */
+  .artifact-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:8px;
+  }
+  .artifact-head h2{margin-bottom:0;}
+
+  .process-flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0;
+    margin:28px 0 8px 0;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .stage{
+    flex:1;
+    min-width:140px;
+    padding:18px 18px 20px;
+    border-right:1px solid var(--line);
+    position:relative;
+  }
+  .stage:last-child{border-right:none;}
+  .stage-num{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--teal);
+    letter-spacing:.08em;
+  }
+  .stage h4{
+    font-family:var(--display);
+    font-size:.98rem;
+    margin:8px 0 6px 0;
+    color:var(--text);
+  }
+  .stage p{
+    font-size:13px;
+    margin:0;
+    color:var(--text-muted);
+  }
+
+  .feature-list{
+    margin:20px 0 0 0;
+    padding:0;
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 24px;
+  }
+  .feature-list li{
+    font-size:14px;
+    color:var(--text-muted);
+    padding-left:18px;
+    position:relative;
+  }
+  .feature-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:8px;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--amber);
+  }
+
+  .subhead{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text);
+    margin:34px 0 10px 0;
+    display:block;
+  }
+
+  .demo-box{
+    background:var(--bg-elev);
+    border:1px dashed var(--line);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    margin-top:12px;
+  }
+  .demo-box a.demo-link{
+    color:var(--teal);
+    font-family:var(--mono);
+    font-size:13px;
+    text-decoration:none;
+    border-bottom:1px solid var(--teal-dim);
+  }
+  .shot-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:16px;
+  }
+  .shot-placeholder{
+    aspect-ratio:16/10;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-muted);
+    text-align:center;
+    padding:10px;
+  }
+
+  .reflection{
+    background:var(--bg-elev);
+    border-left:2px solid var(--amber);
+    border-radius:0 var(--radius) var(--radius) 0;
+    padding:22px 26px;
+    margin-top:30px;
+  }
+  .reflection p{color:var(--text); font-size:14.5px;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-top:8px;
+  }
+  .contact-card{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    text-decoration:none;
+    display:block;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .contact-card:hover{border-color:var(--teal); transform:translateY(-3px);}
+  .contact-k{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-muted);
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    display:block;
+    margin-bottom:8px;
+  }
+  .contact-v{
+    font-family:var(--display);
+    font-size:1rem;
+    color:var(--text);
+  }
+
+  footer{
+    padding:30px 40px 60px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-muted);
+    max-width:820px;
+  }
+
+  /* ---------- Mobile nav (top bar replaces spine) ---------- */
+  .topbar{
+    display:none;
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(18,22,27,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+    padding:14px 20px;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .topbar .brand{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--teal);
+  }
+  .topbar nav{display:flex; gap:16px;}
+  .topbar nav a{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--text-muted);
+    text-decoration:none;
+  }
+  .topbar nav a.active{color:var(--teal);}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr;}
+    .spine{display:none;}
+    .topbar{display:flex;}
+    section{padding:60px 22px; max-width:none;}
+    .contact-grid{grid-template-columns:1fr;}
+    .feature-list{grid-template-columns:1fr;}
+    .stat-strip{flex-direction:column;}
+    .stat{border-right:none; border-bottom:1px solid var(--line);}
+    .stat:last-child{border-bottom:none;}
+    .process-flow{flex-direction:column;}
+    .stage{border-right:none; border-bottom:1px solid var(--line);}
+    .stage:last-child{border-bottom:none;}
+    .shot-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="brand">SPS/</span>
+  <nav id="topnav">
+    <a href="#home" data-nav>Home</a>
+    <a href="#about" data-nav>About</a>
+    <a href="#portfolio" data-nav>Work</a>
+    <a href="#contact" data-nav>Contact</a>
+  </nav>
+</div>
+
+<div class="shell">
+  <div class="spine">
+    <div class="spine-cap"></div>
+    <div class="spine-line" id="spineLine">
+      <div class="spine-node" data-target="home" style="top:2%;"><span class="spine-label">SOURCE</span></div>
+      <div class="spine-node" data-target="about" style="top:34%;"><span class="spine-label">PROFILE</span></div>
+      <div class="spine-node" data-target="portfolio" style="top:64%;"><span class="spine-label">ARTIFACT</span></div>
+      <div class="spine-node" data-target="contact" style="top:94%;"><span class="spine-label">OUTPUT</span></div>
+    </div>
+    <div class="spine-cap"></div>
+  </div>
+
+  <main>
+
+    <section id="home">
+      <div class="role-line">// data engineer · AI in data analytics grad student</div>
+      <h1>Sai Phaneendra Sista</h1>
+      <p class="hero-lede">
+        I design scalable data pipelines and cloud-based ETL systems, and I'm now extending that foundation
+        into artificial intelligence — building AI-powered applications that turn raw data into decisions
+        organizations can act on.
+      </p>
+      <p class="hero-lede">
+        This portfolio documents my learning journey through the <strong>AI in Data Analytics</strong> program
+        at <strong>Indiana Wesleyan University</strong>, and shows how I apply AI and data engineering together
+        to solve real problems.
+      </p>
+      <div class="hero-cta">
+        <a href="#portfolio" class="btn btn-primary">View the artifact →</a>
+        <a href="#contact" class="btn btn-ghost">Get in touch</a>
+      </div>
+
+      <div class="stat-strip">
+        <div class="stat">
+          <span class="stat-k">Python · SQL</span>
+          <span class="stat-v">core languages</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">Snowflake</span>
+          <span class="stat-v">cloud warehouse</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">AWS · Azure</span>
+          <span class="stat-v">cloud platforms</span>
+        </div>
+        <div class="stat">
+          <span class="stat-k">Spark</span>
+          <span class="stat-v">distributed processing</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="eyebrow">Profile</div>
+      <h2>About me</h2>
+      <p>
+        I'm a Data Engineer with experience designing and implementing cloud-based data pipelines using
+        Python, SQL, Snowflake, AWS, Azure, and Spark. My professional work has centered on building ETL
+        processes, optimizing data workflows, and developing analytics solutions that scale.
+      </p>
+      <p>
+        As a graduate student in the AI in Data Analytics program at Indiana Wesleyan University, I'm
+        expanding into Machine Learning, Generative AI, and applied AI systems — with the goal of building
+        intelligent solutions that combine data engineering with AI-driven decision making.
+      </p>
+      <p>
+        I enjoy solving technical problems, picking up emerging tools quickly, and building practical AI
+        applications that simplify complex work.
+      </p>
+
+      <div class="value-card">
+        <div class="eyebrow" style="margin-bottom:10px;">Value proposition</div>
+        <p>
+          I combine strong data engineering fundamentals with practical AI knowledge to design scalable,
+          data-driven solutions that help organizations turn raw data into meaningful insight. By integrating
+          cloud technologies, automation, and generative AI, I build efficient systems — and explain them
+          clearly to both technical and non-technical stakeholders.
+        </p>
+      </div>
+
+      <div class="tag-row">
+        <span class="tag">Data Pipelines</span>
+        <span class="tag">ETL / ELT</span>
+        <span class="tag">Cloud Data Engineering</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Generative AI</span>
+        <span class="tag">Prompt Engineering</span>
+      </div>
+    </section>
+
+    <section id="portfolio">
+      <div class="eyebrow">Artifact 01</div>
+      <div class="artifact-head">
+        <h2>Data Engineer Interview Coach</h2>
+      </div>
+      <p>
+        A custom AI assistant I designed during the AI Lab assignment for my AI in Data Analytics course,
+        showing how generative AI can solve a real-world problem: helping aspiring Data Engineers prepare
+        for technical interviews.
+      </p>
+
+      <span class="subhead">Introduction &amp; description</span>
+      <p>
+        Preparing for Data Engineering interviews means covering a wide range of ground — SQL, Python,
+        Snowflake, AWS, Spark, ETL concepts, and behavioral rounds. Most candidates struggle to organize
+        study material and practice effectively across all of it.
+      </p>
+      <p>
+        To address that, I built the <strong>Data Engineer Interview Coach</strong>, a custom GPT that acts
+        as a virtual interview assistant. It reviews resumes, generates personalized study plans, runs mock
+        interviews, explains technical concepts, and gives feedback throughout preparation.
+      </p>
+
+      <span class="subhead">Objective</span>
+      <p>
+        Design and develop an AI-powered interview assistant that supports Data Engineering candidates with
+        personalized learning resources, technical interview prep, resume reviews, and mock interviews.
+      </p>
+
+      <span class="subhead">Process — a design thinking approach</span>
+      <div class="process-flow">
+        <div class="stage">
+          <span class="stage-num">01 · EMPATHIZE</span>
+          <h4>Understand the problem</h4>
+          <p>Identified common challenges students and professionals face preparing for DE interviews.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">02 · DEFINE</span>
+          <h4>Frame the need</h4>
+          <p>Recognized the need for one AI assistant covering technical explanations, coaching, and study plans.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">03 · IDEATE</span>
+          <h4>Brainstorm features</h4>
+          <p>Mapped out resume review, SQL/Python practice, Snowflake &amp; AWS guidance, mock interviews, and study planning.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">04 · PROTOTYPE</span>
+          <h4>Build</h4>
+          <p>Built a Custom GPT in ChatGPT using structured prompt engineering.</p>
+        </div>
+        <div class="stage">
+          <span class="stage-num">05 · TEST</span>
+          <h4>Refine</h4>
+          <p>Tested with varied prompts, refined responses, and improved the conversational experience iteratively.</p>
+        </div>
+      </div>
+
+      <span class="subhead">What it does</span>
+      <ul class="feature-list">
+        <li>Resume review</li>
+        <li>SQL interview practice</li>
+        <li>Python interview questions</li>
+        <li>Snowflake explanations</li>
+        <li>AWS guidance</li>
+        <li>Mock interviews</li>
+        <li>Personalized study planning</li>
+      </ul>
+
+      <span class="subhead">Tools &amp; technologies</span>
+      <div class="tag-row">
+        <span class="tag">ChatGPT Custom GPT</span>
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">Design Thinking</span>
+        <span class="tag">Generative AI</span>
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">AWS</span>
+      </div>
+
+      <span class="subhead">Value &amp; relevance</span>
+      <p>
+        This artifact shows how I combine artificial intelligence with data engineering to solve a practical
+        problem — not a generic chatbot, but an AI assistant purpose-built for Data Engineering interview
+        preparation. It's intended for recruiters, hiring managers, Data Engineering professionals, and
+        students preparing for technical interviews, and it reflects practical AI application, problem-solving,
+        and technical expertise aligned with my career goals.
+      </p>
+
+      <span class="subhead">Live demonstration</span>
+      <div class="demo-box">
+        <strong>Data Engineer Interview Coach</strong> — Custom GPT<br>
+        <a href="#" class="demo-link">Paste your shared GPT link here →</a>
+        <div class="shot-grid">
+          <div class="shot-placeholder">GPT home page screenshot</div>
+          <div class="shot-placeholder">Resume review example</div>
+          <div class="shot-placeholder">SQL interview example</div>
+          <div class="shot-placeholder">Mock interview example</div>
+        </div>
+      </div>
+
+      <div class="reflection">
+        <span class="subhead" style="margin-top:0;">Reflection</span>
+        <p>
+          For my first portfolio artifact, I selected the Data Engineer Interview Coach that I developed
+          during the AI Lab because it best represents my technical skills and demonstrates how Artificial
+          Intelligence can be applied to solve a practical problem. I tailored this artifact for recruiters,
+          hiring managers, and technology professionals by presenting it as a complete AI solution rather
+          than simply describing the assignment. During development, I learned how prompt engineering,
+          iterative testing, and the Design Thinking framework contribute to building user-centered AI
+          applications. I refined the assistant by testing resume reviews, SQL interview questions, and
+          mock interview scenarios to improve the quality and consistency of its responses. This project
+          reflects both my Data Engineering background and my graduate studies in AI in Data Analytics by
+          demonstrating how AI can enhance learning and career preparation. It also represents my commitment
+          to continuous learning and creating practical AI solutions that provide value to end users.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="eyebrow">Connect</div>
+      <h2>Get in touch</h2>
+      <p>Reach out about opportunities, collaboration, or this portfolio.</p>
+      <div class="contact-grid">
+        <a href="mailto:your.email@example.com" class="contact-card">
+          <span class="contact-k">Email</span>
+          <span class="contact-v">your.email@example.com</span>
+        </a>
+        <a href="https://linkedin.com/in/your-profile" class="contact-card">
+          <span class="contact-k">LinkedIn</span>
+          <span class="contact-v">/in/your-profile</span>
+        </a>
+        <a href="https://github.com/your-username" class="contact-card">
+          <span class="contact-k">GitHub</span>
+          <span class="contact-v">@your-username</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  © <span id="year"></span> Sai Phaneendra Sista — built for the AI in Data Analytics program, Indiana Wesleyan University.
+</footer>
+
+<script>
+  const sections = ['home','about','portfolio','contact'].map(id => document.getElementById(id));
+  const spineNodes = document.querySelectorAll('.spine-node');
+  const topLinks = document.querySelectorAll('#topnav a');
+
+  function setActive(id){
+    spineNodes.forEach(n => n.classList.toggle('active', n.dataset.target === id));
+    topLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        setActive(entry.target.id);
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => s && observer.observe(s));
+
+  spineNodes.forEach(n => {
+    n.style.cursor = 'pointer';
+    n.addEventListener('click', () => {
+      document.getElementById(n.dataset.target).scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
